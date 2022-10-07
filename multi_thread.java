@@ -5,37 +5,45 @@ class multi_thread extends Thread{
     public static int average=0, Minimum=0,Maximum=0,Medium=0;
     public static int arraylen= 7;
     public static  int[] array = new int[]{90,81,78,95,79,72,85};
+
     
-    public multi_thread(int computeAverage) {
-    }
+   
     public static void main(String[] args) {
-            multi_thread MTH1 = new multi_thread(computeAverage(array.length));
-            multi_thread MTH2 = new multi_thread(computeMin(array.length));
-            multi_thread MTH3 = new multi_thread(computeMax(array.length));
-            multi_thread MTH4 = new multi_thread(computeMedium(array.length));
-            Thread T1 = new Thread(MTH1);
-            Thread T2 = new Thread(MTH2);
-            Thread T3 = new Thread(MTH3);
-            Thread T4 = new Thread(MTH4);
+           
+            Thread t1 = new Thread(new Runnable() {
+                public void run() {
+                    System.out.println("Thread "+ Thread.currentThread().getName()+" - The average value is  "+computeAverage(array.length));
+                }
+            });
+            Thread t2 = new Thread(new Runnable() {
+                public void run() {
+                    System.out.println("Thread "+ Thread.currentThread().getName()+" - The minimum value is  "+computeMin(array.length));
+                  
+                }
+            });
+            Thread t3 = new Thread(new Runnable() {
+                public void run() {
+                    System.out.println("Thread "+ Thread.currentThread().getName()+" - The maximum value is  "+computeMax(array.length));
+                    
+                }
+            });
+            Thread t4 = new Thread(new Runnable() {
+                public void run() {
+                    System.out.println("Thread "+ Thread.currentThread().getName()+" - The medium value is  "+computeMedium(array.length));
+                }
+            });
 
-
-            T1.start();
-            T2.start();
-            T3.start();
-            T4.start();
+           
+            
+            t1.start();
+            t2.start();
+            t3.start();
+            t4.start();
        
     }
-    public void run(){
-        System.out.println("Thread "+ Thread.currentThread().getId()+" - The average value is  "+computeAverage(array.length));
-        System.out.println("Thread "+ Thread.currentThread().getId()+" - The minimum value is  "+computeMin(array.length));
-        System.out.println("Thread "+ Thread.currentThread().getId()+" - The maximum value is  "+computeMax(array.length));
-        System.out.println("Thread "+ Thread.currentThread().getId()+" - The medium value is  "+computeMedium(array.length));
 
-      
-    }
-   
-  
-    
+
+
     private static int computeMedium(int n) {
         Arrays.sort(array);
  
